@@ -7,7 +7,7 @@ const { google } = require("googleapis");
 });
  */
 router.post("/", async (req, res) => {
-  const { name, email, password } = await req.body;
+  const { name, email, password, dateSignIn } = await req.body;
 
   const auth = new google.auth.GoogleAuth({
     keyFile: "credentials.json",
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
     range: "Página1",
     valueInputOption: "USER_ENTERED",
     resource: {
-      values: [[name, email, password, "sampleDate", 25]],
+      values: [[name, email, password, dateSignIn, "", 0]],
     },
   });
 
