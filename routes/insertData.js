@@ -7,7 +7,7 @@ const { google } = require("googleapis");
 });
  */
 router.post("/", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password } = await req.body;
 
   const auth = new google.auth.GoogleAuth({
     keyFile: "credentials.json",
@@ -36,19 +36,18 @@ router.post("/", async (req, res) => {
 
   // Write row(s) to spreadsheet
   // Nesse formato Paê, faz uma função pra passar esses valores dinâmicamente
-  console.log("Look at the data!");
-  console.log(name, password, email);
-  if (name && password && email) {
-    await sheets.spreadsheets.values.append({
-      auth,
-      spreadsheetId: spreadsheetID,
-      range: "Página1",
-      valueInputOption: "USER_ENTERED",
-      resource: {
-        values: [[name, email, password, "sampleDate", 25]],
-      },
-    });
-  }
+  console.log("OLHA O BODY!");
+  console.log(req.body);
+
+  await sheets.spreadsheets.values.append({
+    auth,
+    spreadsheetId: spreadsheetID,
+    range: "Página1",
+    valueInputOption: "USER_ENTERED",
+    resource: {
+      values: [[name, email, password, "sampleDate", 25]],
+    },
+  });
 
   // res.send(getRows.data);
 
