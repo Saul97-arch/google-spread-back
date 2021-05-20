@@ -8,6 +8,7 @@ const cors = require("cors");
 const indexRouter = require("./routes/index");
 const insertData = require("./routes/insertData");
 const update = require("./routes/update");
+const getRows = require("./routes/getRows");
 const app = express();
 
 // view engine setup
@@ -21,10 +22,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// use routes 
+// use routes
 app.use("/", indexRouter);
 app.use("/insertData", insertData);
 app.use("/update", update);
+app.use("/getRows", getRows);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -41,7 +43,6 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-// Ask to felipe if is ther a better way
 app.listen(8000, () => {
   console.log(`Express started at http://localhost:8000`);
 });
