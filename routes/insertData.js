@@ -19,18 +19,18 @@ router.post("/", async (req, res) => {
 
   // Instance of google Sheets API
   const sheets = google.sheets({ version: "v4", auth: client });
-  const spreadsheetID = "1fO850ZLI6L-1yKVlAaM783VC9usIKg673c4mBuECGWo";
+  const spreadsheetId = "1fO850ZLI6L-1yKVlAaM783VC9usIKg673c4mBuECGWo";
   // Get metadata about spreadsheet
   const metaData = await sheets.spreadsheets.get({
     auth,
-    spreadsheetId: spreadsheetID,
+    spreadsheetId: spreadsheetId,
   });
 
   // Read rows from spreadsheet
   const getRows = await sheets.spreadsheets.values.get({
     auth,
-    spreadsheetId: spreadsheetID,
-    // range: "Página1!A:A", pegaria a primeira coluna apenas, googlar parâmetros
+    spreadsheetId: spreadsheetId,
+    // range: "Página1!A:A", pegaria a primeira coluna apenas
     range: "Página1",
   });
 
@@ -39,15 +39,19 @@ router.post("/", async (req, res) => {
   console.log("OLHA O BODY!");
   console.log(req.body);
 
-  await sheets.spreadsheets.values.append({
-    auth,
-    spreadsheetId: spreadsheetID,
-    range: "Página1",
-    valueInputOption: "USER_ENTERED",
-    resource: {
-      values: [[name, email, password, dateSignIn, "", 0]],
-    },
-  });
+  try {
+    await sheets.spreadsheets.values.append({
+      auth,
+      spreadsheetId: spreadsheetId,
+      range: "Página1",
+      valueInputOption: "USER_ENTERED",
+      resource: {
+        values: [[name, email, password, dateSignIn, "", 0]],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 
   // res.send(getRows.data);
 
