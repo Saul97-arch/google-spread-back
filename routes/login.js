@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const { google } = require("googleapis");
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
+  // Lógica de procurar e achar no banco de dados(spreadsheet)
+  // Mandar se funcionou ou não
+  const { name, email, password, dateSignIn } = await req.body;
+
   const auth = new google.auth.GoogleAuth({
     keyFile: "credentials.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets",
@@ -28,8 +32,15 @@ router.get("/", async (req, res) => {
       // range: "Página1!A:A", pegaria a primeira coluna apenas
       range: "Página1",
     });
-    console.log(getRows.data.values);
-    res.send(getRows.data.values);
+
+    for (let i = 1; i < getRows.data.values.length; i++) {
+      if (getRows.data.values[i][1] === email && getRows.data.values[i][2] === password) {
+        res.send({data: getRows.data.values[i]});
+        break;
+      } 
+    }
+
+    // res.send("Nothing has been found!");
   } catch (err) {
     console.log(err);
   }

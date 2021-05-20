@@ -9,6 +9,7 @@ const indexRouter = require("./routes/index");
 const insertData = require("./routes/insertData");
 const update = require("./routes/update");
 const getRows = require("./routes/getRows");
+const login = require("./routes/login");
 const app = express();
 
 // view engine setup
@@ -27,6 +28,7 @@ app.use("/", indexRouter);
 app.use("/insertData", insertData);
 app.use("/update", update);
 app.use("/getRows", getRows);
+app.use("/login", login)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

@@ -19,10 +19,10 @@ router.put("/", async (req, res) => {
     await sheets.spreadsheets.values.update({
       auth,
       spreadsheetId: spreadsheetId,
-      range: "F2:F2",
+      range: "F3:F3",
       valueInputOption: "USER_ENTERED",
       resource: {
-        values: [["2"]],
+        values: [["34"]],
       },
     }).data;
   } catch (err) {
