@@ -34,8 +34,11 @@ router.post("/", async (req, res) => {
     });
 
     for (let i = 1; i < getRows.data.values.length; i++) {
-      if (getRows.data.values[i][1] === email && getRows.data.values[i][2] === password) {
-        res.send({data: getRows.data.values[i]});
+      if (
+        getRows.data.values[i][1] === email &&
+        getRows.data.values[i][2] === password
+      ) {
+        res.send({ data: getRows.data.values[i] });
         break;
       } 
     }
