@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { google } = require("googleapis");
+const { credentials } = require('../services/spreadsheet');
 
 router.put("/", async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "credentials.json",
+    keyFile: 'credentials.json',
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
 
