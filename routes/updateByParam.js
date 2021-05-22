@@ -5,7 +5,7 @@ const { credentials } = require("../services/spreadsheet");
 
 router.post("/", async (req, res) => {
   console.log('rota update')
-  const { val1, val2, cellVall } = req.query;
+  const { startColumnIndex, startRowIndex, cellVall } = req.query;
   const auth = new google.auth.GoogleAuth({
     keyFile: "credentials.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets",
@@ -29,8 +29,8 @@ router.post("/", async (req, res) => {
           {
             dataFilter: {
               gridRange: {
-                startColumnIndex: val1, // 4
-                startRowIndex: val2, // 2
+                startColumnIndex: startColumnIndex, // 4
+                startRowIndex: startRowIndex, // 2
                 sheetId: 0,
               },
             },
@@ -43,7 +43,6 @@ router.post("/", async (req, res) => {
   } catch (err) {
     console.error(err);
   }
-  console.log(val1, val2);
   res.send("RONALDO");
 });
 

@@ -29,7 +29,6 @@ router.get("/", async (req, res) => {
       // range: "Página1!A:A", pegaria a primeira coluna apenas
       range: "Página1",
     });
-    console.log(getRows.data.values);
     res.send(getRows.data.values);
   } catch (err) {
     console.log(err);
