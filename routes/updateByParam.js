@@ -29,8 +29,8 @@ router.post("/", async (req, res) => {
           {
             dataFilter: {
               gridRange: {
-                startColumnIndex: val1,
-                startRowIndex: val2,
+                startColumnIndex: val1, // 4
+                startRowIndex: val2, // 2
                 sheetId: 0,
               },
             },
