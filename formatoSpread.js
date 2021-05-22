@@ -23,19 +23,6 @@ const formato = [
     "",
     "0",
   ],
-  [
-    "Saulo", 
-    "sauloferreira@gmail.com", 
-    "salo1234", "20/05/2021", 
-    "", 
-    "0"
-  ],
-  [
-    "Roger", 
-    "roger332@gmail.com", 
-    "roger93012", 
-    "20/5/2021", 
-    "", 
-    "0"
-  ],
+  ["Saulo", "sauloferreira@gmail.com", "salo1234", "20/05/2021", "", "0"],
+  ["Roger", "roger332@gmail.com", "roger93012", "20/5/2021", "", "0"],
 ];
