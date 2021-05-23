@@ -13,8 +13,8 @@ exports.updateByParam = async (req, res) => {
           {
             dataFilter: {
               gridRange: {
-                startColumnIndex, // 4
-                startRowIndex, // 2
+                startColumnIndex,
+                startRowIndex,
                 sheetId: 0,
               },
             },
