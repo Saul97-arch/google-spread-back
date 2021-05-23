@@ -32,5 +32,6 @@ cd desafio-prepi-back
 
 ### 3) A aplicação irá rodar na porta:
 
-`http://localhost:8000`
+[http://localhost:8000](http://localhost:8000) 
+
 
