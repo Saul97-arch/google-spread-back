@@ -1,4 +1,4 @@
-const userInfo = (data ) => {
+const userInfo = (data) => {
   return {
     name: data[0],
     email: data[1],
@@ -6,7 +6,7 @@ const userInfo = (data ) => {
     birthday: data[3],
     dateFirstProduct: data[4],
     productCount: data[5],
-  }
-}
+  };
+};
 
-module.exports = { userInfo }
+module.exports = { userInfo };

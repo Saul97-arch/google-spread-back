@@ -1,6 +1,5 @@
-const { sheets, spreadsheetId, auth } = require("../services/spreadsheet");
-const credentials = require("../credentials.json");
-const { userInfo } = require("./helpers/userInfoDTO");
+const { sheets, spreadsheetId, auth } = require('../services/spreadsheet');
+const { userInfo } = require('./helpers/userInfoDTO');
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -9,13 +8,13 @@ exports.login = async (req, res) => {
     const getRows = await sheets.spreadsheets.values.get({
       spreadsheetId,
       auth,
-      range: "Página1",
+      range: 'Página1',
     });
     const users = getRows.data.values.map((item) => userInfo(item));
-    user = users.find(
-      (item) => item.email == email && item.password == password
+    const user = users.find(
+      (item) => item.email === email && item.password === password
     );
-    if (user == {}) throw (err = { error: "user not found" });
+    if (user === {}) throw new Error('User not found');
     res.status(200).json(user);
   } catch (err) {
     console.log(err);

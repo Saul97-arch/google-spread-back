@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 
-const { getCell } = require("../controllers/getCell");
+const { getCell } = require('../controllers/getCell');
 
 const router = express.Router();
 
-router.post("/", getCell);
+router.post('/', getCell);
 
 module.exports = router;

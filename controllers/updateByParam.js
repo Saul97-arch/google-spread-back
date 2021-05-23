@@ -1,22 +1,20 @@
-const { sheets, spreadsheetId, auth } = require("../services/spreadsheet");
-const credentials = require("../credentials.json");
-const { userInfo } = require("./helpers/userInfoDTO");
+const { sheets, spreadsheetId, auth } = require('../services/spreadsheet');
 
 exports.updateByParam = async (req, res) => {
   const { startColumnIndex, startRowIndex, cellVall } = req.query;
   try {
     const request = {
       auth,
-      spreadsheetId: spreadsheetId,
+      spreadsheetId,
       includeValuesInResponse: true,
       resource: {
-        valueInputOption: "USER_ENTERED",
+        valueInputOption: 'USER_ENTERED',
         data: [
           {
             dataFilter: {
               gridRange: {
-                startColumnIndex: startColumnIndex, // 4
-                startRowIndex: startRowIndex, // 2
+                startColumnIndex, // 4
+                startRowIndex, // 2
                 sheetId: 0,
               },
             },
@@ -28,8 +26,9 @@ exports.updateByParam = async (req, res) => {
     const result = await sheets.spreadsheets.values.batchUpdateByDataFilter(
       request
     ).data;
+    return res.status(201).json({ update: 'ok', result });
   } catch (err) {
     console.error(err);
+    return res.status(400).send(err);
   }
-  res.send("RONALDO");
 };

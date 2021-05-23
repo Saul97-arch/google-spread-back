@@ -1,23 +1,21 @@
-const { sheets, spreadsheetId, auth } = require("../services/spreadsheet");
-const credentials = require("../credentials.json");
-const { userInfo } = require("./helpers/userInfoDTO");
+const { sheets, spreadsheetId, auth } = require('../services/spreadsheet');
 
 exports.getCell = async (req, res) => {
   const { startRowIndex, endRowIndex } = req.query;
   try {
     const request = {
-      spreadsheetId: spreadsheetId,
+      spreadsheetId,
       auth,
-      dateTimeRenderOption: "FORMATTED_STRING",
+      dateTimeRenderOption: 'FORMATTED_STRING',
 
       resource: {
-        valueRenderOption: "FORMATTED_VALUE",
+        valueRenderOption: 'FORMATTED_VALUE',
         dataFilters: [
           {
             gridRange: {
-              startRowIndex: startRowIndex,
+              startRowIndex,
               startColumnIndex: 5,
-              endRowIndex: endRowIndex,
+              endRowIndex,
             },
           },
         ],
@@ -28,9 +26,9 @@ exports.getCell = async (req, res) => {
       request
     );
     const response = reqToAPI.data.valueRanges[0].valueRange.values[0][0];
-    console.log("RESPONSE", response);
-    res.send({ res: response });
+    res.status(200).json({ res: response });
   } catch (err) {
     console.error(err);
+    return res.status(400);
   }
 };
