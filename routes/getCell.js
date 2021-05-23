@@ -5,7 +5,7 @@ const { credentials } = require("../services/spreadsheet");
 
 router.post("/", async (req, res) => {
   console.log("rota getCell");
-  //const { startColumnIndex, startRowIndex } = req.query;
+  const { startRowIndex, endRowIndex } = req.query;
   const auth = new google.auth.GoogleAuth({
     keyFile: "credentials.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets",
@@ -29,9 +29,9 @@ router.post("/", async (req, res) => {
         dataFilters: [
           {
             gridRange: {
-              startRowIndex: 1,
+              startRowIndex: startRowIndex,
               startColumnIndex: 5,
-              endRowIndex: 2,
+              endRowIndex: endRowIndex,
             },
           },
         ],
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 
     const response = reqToAPI.data.valueRanges[0].valueRange.values[0][0];
     console.log("RESPONSE", response);
-    res.send(response);
+    res.send({res: response});
   } catch (err) {
     console.error(err);
   }
