@@ -2,12 +2,13 @@ const createError = require("http-errors");
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const loginRoute = require('./routes/login.routes');
+const loginRoute = require("./routes/login.routes");
 const indexRouter = require("./routes/index");
 const insertData = require("./routes/insertData");
 const update = require("./routes/update");
-const updateByParam = require("./routes/updateByParam")
+const updateByParam = require("./routes/updateByParam");
 const getRows = require("./routes/getRows");
+const getCell = require("./routes/getCell");
 const app = express();
 
 app.use(logger("dev"));
@@ -22,6 +23,7 @@ app.use("/update", update);
 app.use("/getRows", getRows);
 app.use("/login", loginRoute);
 app.use("/updateByParam", updateByParam);
+app.use("/getCell", getCell);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
