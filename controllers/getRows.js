@@ -1,6 +1,4 @@
 const { sheets, spreadsheetId, auth } = require("../services/spreadsheet");
-const credentials = require("../credentials.json");
-const { userInfo } = require("./helpers/userInfoDTO");
 
 exports.getRows = async (req, res) => {
   try {

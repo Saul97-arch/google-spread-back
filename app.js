@@ -5,10 +5,9 @@ const cors = require("cors");
 const loginRoute = require("./routes/login.routes");
 const getRowsRoute = require("./routes/getRows.routes");
 const indexRouter = require("./routes/index");
-const insertData = require("./routes/insertData");
-const update = require("./routes/update");
+const insertDataRoute = require("./routes/insertData.routes");
 const updateByParam = require("./routes/updateByParam");
-const getCell = require("./routes/getCell");
+const getCellRoute = require("./routes/getCell.routes");
 const app = express();
 
 app.use(logger("dev"));
@@ -18,12 +17,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // use routes
 app.use("/", indexRouter);
-app.use("/insertData", insertData);
-app.use("/update", update);
+app.use("/insertData", insertDataRoute);
 app.use("/getRows", getRowsRoute);
 app.use("/login", loginRoute);
 app.use("/updateByParam", updateByParam);
-app.use("/getCell", getCell);
+app.use("/getCell", getCellRoute);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
